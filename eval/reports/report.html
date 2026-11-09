@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Entity Resolution: evaluation</title><style>
+:root { --bg:#0b0e13; --panel:#121720; --line:#232c3a; --ink:#e8ecf2; --ink2:#9aa6b8; --s1:#3987e5; --s2:#d95926;
+  --good:#3fcf8e; --bad:#ff6b6b; --mid:#ffb454; font-family: Inter, system-ui, sans-serif; }
+* { box-sizing: border-box; } body { margin:0; background:var(--bg); color:var(--ink); line-height:1.5; }
+main { max-width: 1180px; margin: 0 auto; padding: 40px 28px 64px; }
+h1 { font-size: 30px; letter-spacing:-0.02em; margin: 0 0 6px; } h2 { font-size: 19px; margin: 34px 0 14px; }
+.sub, .muted { color: var(--ink2); } .sub { margin: 0 0 24px; }
+.tiles { display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.tile { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+.tile b { display:block; font-size: 28px; letter-spacing:-0.02em; } .tile span { color: var(--ink2); font-size: 13px; }
+table { width:100%; border-collapse: collapse; background:var(--panel); border:1px solid var(--line);
+  border-radius:12px; overflow:hidden; font-size: 13.5px; }
+th, td { padding: 8px 12px; border-bottom:1px solid var(--line); text-align:right; }
+th:first-child, td:first-child { text-align:left; } th { color: var(--ink2); font-weight:500; font-size:12px; }
+td.good { color: var(--good); font-weight:600; } td.bad { color: var(--bad); font-weight:600; } td.mid { color: var(--mid); font-weight:600; }
+tr.best td { background: rgba(57,135,229,.10); }
+.cols { display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+</style></head><body><main>
+<h1>Who is who, measured</h1>
+<p class="sub">14,978 customer records of 6,000 people from three systems. The matcher learns from half the
+people; everything here is on the other 3,000, with twins, fathers and sons, and families at one address.</p>
+<div class="tiles"><div class="tile"><b>0.986</b><span>pairwise F1 on people the matcher never saw (rules: 0.930)</span></div><div class="tile"><b>4.9x</b><span>fewer pairwise errors than hand-written rules</span></div><div class="tile"><b>13</b><span>clusters mixing different people (connected components: 54)</span></div><div class="tile"><b>99.5%</b><span>of true pairs kept while skipping 99.37% of comparisons</span></div></div>
+<h2>Resolution (7,525 records, 3,000 true people)</h2>
+<table><tr><th>method</th><th>pair precision</th><th>pair recall</th><th>pair F1</th><th>B-cubed F1</th><th>clusters</th>
+<th>clusters mixing people</th></tr><tr class=""><td>exact match (email, or name + birth date)</td><td>1.000</td><td>0.598</td><td>0.748</td><td>0.860</td><td>4,526</td><td>0</td></tr><tr class=""><td>hand-written rules</td><td>0.973</td><td>0.891</td><td>0.930</td><td>0.960</td><td>3,378</td><td>35</td></tr><tr class=""><td>matcher + connected components</td><td>0.950</td><td>0.989</td><td>0.969</td><td>0.987</td><td>2,993</td><td>54</td></tr><tr class="best"><td>matcher + average linkage</td><td>0.993</td><td>0.978</td><td>0.986</td><td>0.992</td><td>3,065</td><td>13</td></tr></table>
+<h2>Look-alikes wrongly merged</h2>
+<table><tr><th>method</th><th>twins</th><th>father and son, same name</th><th>family at the same address</th></tr><tr><td>exact match (email, or name + birth date)</td><td class="good">0.0%</td><td class="good">0.0%</td><td class="good">0.0%</td></tr><tr><td>hand-written rules</td><td class="good">0.0%</td><td class="bad">83.7%</td><td class="mid">2.6%</td></tr><tr><td>matcher + connected components</td><td class="bad">33.2%</td><td class="bad">44.7%</td><td class="bad">12.6%</td></tr><tr><td>matcher + average linkage</td><td class="good">1.3%</td><td class="bad">20.5%</td><td class="good">0.3%</td></tr></table>
+<div class="cols"><div><h2>Threshold (average linkage)</h2>
+<table><tr><th>threshold</th><th>precision</th><th>recall</th><th>F1</th></tr><tr><td>0.3</td><td>0.984</td><td>0.987</td><td>0.986</td></tr><tr><td>0.5</td><td>0.993</td><td>0.978</td><td>0.986</td></tr><tr><td>0.7</td><td>0.997</td><td>0.962</td><td>0.979</td></tr><tr><td>0.9</td><td>0.999</td><td>0.930</td><td>0.963</td></tr></table></div>
+<div><h2>What the matcher relies on</h2><table><tr><th>feature</th><th>drop in average precision when shuffled</th></tr><tr><td>email_equal</td><td>0.1814</td></tr><tr><td>phone_equal</td><td>0.1720</td></tr><tr><td>dob_equal</td><td>0.0610</td></tr><tr><td>postcode_equal</td><td>0.0474</td></tr><tr><td>first_jw</td><td>0.0181</td></tr><tr><td>dob_missing</td><td>0.0076</td></tr><tr><td>dob_two_of_three</td><td>0.0035</td></tr><tr><td>dob_day_month_swapped</td><td>0.0029</td></tr></table></div></div>
+</main></body></html>

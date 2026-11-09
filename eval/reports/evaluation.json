@@ -1,0 +1,155 @@
+{
+  "records": 14978,
+  "people": 6000,
+  "test_records": 7525,
+  "test_people": 3000,
+  "blocking": {
+    "candidate_pairs": 178977,
+    "all_pairs": 28309050.0,
+    "pair_completeness": 0.9951549152110162,
+    "reduction_ratio": 0.9936777461624463,
+    "skipped_blocks": 2
+  },
+  "matcher": {
+    "average_precision": 0.9951275956302169,
+    "positives": 0.04370952692245372
+  },
+  "methods": {
+    "exact match (email, or name + birth date)": {
+      "pair_precision": 1.0,
+      "pair_recall": 0.5976029580517659,
+      "pair_f1": 0.7481245011971269,
+      "bcubed_precision": 1.0,
+      "bcubed_recall": 0.7543521594684386,
+      "bcubed_f1": 0.8599780327993032,
+      "clusters": 4526,
+      "true_entities": 3000,
+      "merged_clusters": 0,
+      "largest_cluster": 5
+    },
+    "hand-written rules": {
+      "pair_precision": 0.9728676777514957,
+      "pair_recall": 0.8914956011730205,
+      "pair_f1": 0.9304058549567531,
+      "bcubed_precision": 0.9904543584875811,
+      "bcubed_recall": 0.930781838316722,
+      "bcubed_f1": 0.959691400875459,
+      "clusters": 3378,
+      "true_entities": 3000,
+      "merged_clusters": 35,
+      "largest_cluster": 10
+    },
+    "matcher + connected components": {
+      "pair_precision": 0.9503858875413451,
+      "pair_recall": 0.989162310340431,
+      "pair_f1": 0.9693864800699739,
+      "bcubed_precision": 0.9822540737225122,
+      "bcubed_recall": 0.9922524916943521,
+      "bcubed_f1": 0.9872279679377217,
+      "clusters": 2993,
+      "true_entities": 3000,
+      "merged_clusters": 54,
+      "largest_cluster": 9
+    },
+    "matcher + average linkage": {
+      "pair_precision": 0.9932694796790059,
+      "pair_recall": 0.978452122912151,
+      "pair_f1": 0.985805125570043,
+      "bcubed_precision": 0.9970741971207088,
+      "bcubed_recall": 0.986343300110742,
+      "bcubed_f1": 0.9916797198936335,
+      "clusters": 3065,
+      "true_entities": 3000,
+      "merged_clusters": 13,
+      "largest_cluster": 8
+    }
+  },
+  "lookalikes": {
+    "exact match (email, or name + birth date)": {
+      "twin": 0.0,
+      "junior": 0.0,
+      "family": 0.0
+    },
+    "hand-written rules": {
+      "twin": 0.0,
+      "junior": 0.8372093023255814,
+      "family": 0.025510204081632654
+    },
+    "matcher + connected components": {
+      "twin": 0.3322475570032573,
+      "junior": 0.44651162790697674,
+      "family": 0.12585034013605442
+    },
+    "matcher + average linkage": {
+      "twin": 0.013029315960912053,
+      "junior": 0.20465116279069767,
+      "family": 0.003401360544217687
+    },
+    "pairs": {
+      "twin": 307.0,
+      "junior": 215.0,
+      "family": 588.0
+    }
+  },
+  "sensitivity": [
+    {
+      "threshold": 0.3,
+      "precision": 0.9839878002287457,
+      "recall": 0.9872497768710953,
+      "f1": 0.9856160896130346
+    },
+    {
+      "threshold": 0.5,
+      "precision": 0.9932694796790059,
+      "recall": 0.978452122912151,
+      "f1": 0.985805125570043
+    },
+    {
+      "threshold": 0.7,
+      "precision": 0.9969612894702075,
+      "recall": 0.9621318373071529,
+      "f1": 0.9792369582143785
+    },
+    {
+      "threshold": 0.9,
+      "precision": 0.9990412272291467,
+      "recall": 0.9300012750223129,
+      "f1": 0.963285789751717
+    }
+  ],
+  "importance": [
+    [
+      "email_equal",
+      0.1814263191709916
+    ],
+    [
+      "phone_equal",
+      0.17196004703296341
+    ],
+    [
+      "dob_equal",
+      0.060992054470028534
+    ],
+    [
+      "postcode_equal",
+      0.04742168142802383
+    ],
+    [
+      "first_jw",
+      0.018084744569867528
+    ],
+    [
+      "dob_missing",
+      0.007644150141389083
+    ],
+    [
+      "dob_two_of_three",
+      0.003539872429076829
+    ],
+    [
+      "dob_day_month_swapped",
+      0.002931775015537097
+    ]
+  ],
+  "seconds": 68.38812769996002
+}
