@@ -35,7 +35,8 @@ jobs:
       - name: Tests
         run: pytest
       - name: Compare two records from the CLI
-        run: resolve compare '{"first": "Bob", "last": "Smith", "dob": "1980-01-02"}' '{"first": "Robert", "last": "Smyth", "dob": "1980-02-01"}'
+        run: |
+          resolve compare '{"first": "Bob", "last": "Smith", "dob": "1980-01-02"}' '{"first": "Robert", "last": "Smyth", "dob": "1980-02-01"}'
 
   evaluation:
     name: Labelled evaluation (gate)
